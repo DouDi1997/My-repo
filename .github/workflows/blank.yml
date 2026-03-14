@@ -1,15 +1,14 @@
 name: My_SSH_Server
 on: workflow_dispatch
 jobs:
-  build:
-    runs-on: windows-latest
-    steps:
-      - name: Set Password
-        run: net user runneradmin P@ssword123
-      - name: Connect Tailscale
-        shell: pwsh
-        run: |
-          iex (IWR 'https://tailscale.com/install.ps1' -UseBasicParsing)
-          tailscale up --authkey ${{ secrets.TAILSCALE_AUTHKEY }}
-      - name: Keep Alive
-        run: Start-Sleep -Seconds 21600
+build:
+runs-on: windows-latest
+steps:
+- name: Set Password
+run: net user runneradmin P@ssword123
+- name: Connect Tailscale
+shell: pwsh
+run: |iex (IWR 'https://tailscale.com/install.ps1' -UseBasicParsing)
+tailscale up --authkey ${{ secrets.TAILSCALE_AUTHKEY }}
+- name: Keep Alive
+run: Start-Sleep -Seconds 21600
